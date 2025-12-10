@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Portal de Liquidaciones | Carflex</title>
+
+<style>
+/* ====== FONDO CON IMAGEN ====== */
+body{
+    background-image: url("fondo formulario.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+}
+
+/* ====== CONTENEDOR ====== */
+.contenedor{
+    max-width:650px;
+    margin:40px auto;
+    background:rgba(255,255,255,0.96);
+    border-radius:8px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    overflow:hidden;
+}
+
+.logo{
+    text-align:center;
+    padding:25px;
+    border-bottom:1px solid #eee;
+}
+
+.logo h1{
+    margin:0;
+    font-size:30px;
+    letter-spacing:3px;
+}
+
+.contenido{
+    padding:30px;
+}
+
+h2{
+    text-align:center;
+    margin-top:0;
+    color:#222;
+}
+
+label{
+    font-weight:600;
+    display:block;
+    margin-top:15px;
+}
+
+input, select, textarea{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:14px;
+}
+
+textarea{
+    resize:none;
+}
+
+button{
+    width:100%;
+    background:#ff7225;
+    color:white;
+    border:none;
+    margin-top:25px;
+    padding:14px;
+    font-size:16px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#e5631f;
+}
+
+/* ====== MENSAJE DE ÉXITO ====== */
+.exito{
+    display:none;
+    text-align:center;
+    padding:60px 20px;
+}
+
+.exito h2{
+    color:#033201;
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+.exito button{
+    background:#ff7225;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    font-size:16px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.exito button:hover{
+    background:#e5631f;
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- LOGO CARFLEX -->
+    <div class="logo">
+        <h1>
+            <span style="color:#033201;">C</span>
+            <span style="color:#033201;">A</span>
+            <span style="color:#033201;">R</span>
+            <span style="color:#820889;">F</span>
+            <span style="color:#0dc5aa;">L</span>
+            <span style="color:#ff7225;">E</span>
+            <span style="color:#ffae17;">X</span>
+        </h1>
+        <small>Soluciones en movimiento</small>
+    </div>
+
+    <div class="contenido">
+
+        <!-- FORMULARIO -->
+        <form id="formulario" enctype="multipart/form-data">
+
+            <h2>Portal de Liquidaciones</h2>
+
+            <label>Nombre del taller:</label>
+            <input type="text" name="nombre_taller" required>
+
+            <label>Patente (6 caracteres, sin espacios ni guión):</label>
+            <input 
+                type="text" 
+                name="patente" 
+                required 
+                maxlength="6"
+                pattern="[A-Za-z0-9]{6}"
+                oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '')"
+                placeholder="Ej: AB123C"
+            >
+
+            <label>Ciudad:</label>
+            <select name="ciudad" required>
+                <option value="">Seleccione</option>
+                <option>Santiago</option>
+                <option>Valparaíso</option>
+                <option>Viña del Mar</option>
+                <option>Rancagua</option>
+                <option>Talca</option>
+                <option>Concepción</option>
+                <option>Temuco</option>
+                <option>Puerto Montt</option>
+            </select>
+
+            <label>Tipo de trabajo:</label>
+            <select name="tipo_trabajo" required>
+                <option value="">Seleccione</option>
+                <option>Mantención</option>
+                <option>Reparación Mecánica</option>
+                <option>Revisión Técnica</option>
+                <option>Neumático</option>
+                <option>Siniestro y DYP</option>
+                <option>Otros</option>
+            </select>
+
+            <label>Descripción del trabajo:</label>
+            <textarea name="descripcion_trabajo" rows="4" required></textarea>
+
+            <label>Fecha de entrega de la unidad:</label>
+            <input type="date" name="fecha_entrega" required>
+
+            <label>Ingrese la liquidación correspondiente (PDF):</label>
+            <input type="file" name="archivo_pdf" accept="application/pdf" required>
+
+            <button type="submit">Enviar Liquidación</button>
+
+        </form>
+
+        <!-- MENSAJE DE ÉXITO -->
+        <div id="mensaje" class="exito">
+            <h2>✅ Liquidación enviada correctamente</h2>
+            <button onclick="window.location.href = window.location.href">
+                Enviar otra liquidación
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+document.getElementById("formulario").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const form = document.getElementById("formulario");
+    const data = new FormData(form);
+    const mensaje = document.getElementById("mensaje");
+
+    const webhook = "https://hook.us2.make.com/kicua3wb3w8xuw1oah4vnur0zo6d96t7";
+
+    try {
+        const res = await fetch(webhook, { method: "POST", body: data });
+
+        if (res.ok) {
+            form.style.display = "none";
+            mensaje.style.display = "block";
+        } else {
+            alert("❌ Error al enviar la liquidación");
+        }
+
+    } catch (error) {
+        alert("❌ Error de conexión");
+    }
+});
+</script>
+
+</body>
+</html>
