@@ -17,7 +17,7 @@ body{
 
 /* ====== CONTENEDOR ====== */
 .contenedor{
-    max-width:720px;
+    max-width:820px; /* MÁS ANCHO */
     margin:40px auto;
     background:rgba(255,255,255,0.96);
     border-radius:8px;
@@ -38,7 +38,7 @@ body{
 }
 
 .contenido{
-    padding:30px;
+    padding:40px; /* MÁS AIRE */
 }
 
 h2{
@@ -52,7 +52,7 @@ h2{
     text-align:center;
     color:#555;
     font-size:14px;
-    margin-bottom:25px;
+    margin-bottom:30px;
 }
 
 /* ====== FORMULARIO ====== */
@@ -64,8 +64,8 @@ label{
 
 input, select, textarea{
     width:100%;
-    padding:10px;
-    margin-top:5px;
+    padding:11px;
+    margin-top:6px;
     border:1px solid #ccc;
     border-radius:5px;
     font-size:14px;
@@ -82,11 +82,12 @@ input:focus, select:focus, textarea:focus{
     box-shadow:0 0 0 2px rgba(255,114,37,0.15);
 }
 
-/* ====== GRID ====== */
+/* ====== GRID (COLUMNAS MÁS SEPARADAS) ====== */
 .fila-doble{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:20px;
+    column-gap:40px; /* SEPARACIÓN HORIZONTAL */
+    row-gap:20px;
 }
 
 .full{
@@ -95,7 +96,7 @@ input:focus, select:focus, textarea:focus{
 
 /* ====== SEPARADOR ====== */
 .separador{
-    margin:25px 0;
+    margin:30px 0;
     border-top:1px solid #eee;
 }
 
@@ -105,8 +106,8 @@ button{
     background:#ff7225;
     color:white;
     border:none;
-    margin-top:25px;
-    padding:14px;
+    margin-top:30px;
+    padding:15px;
     font-size:16px;
     border-radius:6px;
     cursor:pointer;
@@ -174,6 +175,7 @@ button:disabled{
                     <label>Nombre del taller</label>
                     <input type="text" name="nombre_taller" placeholder="Ej: Taller Mecánico San José" required>
                 </div>
+
                 <div>
                     <label>Correo electrónico del taller</label>
                     <input type="email" name="correo_taller" required>
@@ -194,6 +196,7 @@ button:disabled{
                         placeholder="AB123C"
                     >
                 </div>
+
                 <div>
                     <label>Ciudad</label>
                     <select name="ciudad" required>
@@ -224,6 +227,7 @@ button:disabled{
                         <option>Otros</option>
                     </select>
                 </div>
+
                 <div>
                     <label>Fecha de entrega de la unidad</label>
                     <input type="date" name="fecha_entrega" required>
