@@ -518,7 +518,7 @@ document.getElementById("formulario").addEventListener("submit", async (e)=>{
     document.getElementById("mensaje").style.display = "block";
 
   }catch(err){
-    alert("❌ Error al enviar la liquidación");
+    alert("❌ El sistema de recepción de liquidaciones no se encuentra disponible temporalmente. Por favor, inténtelo nuevamente en unos minutos. Si el inconveniente persiste, contacte al equipo de Soporte Carflex.");
     btn.disabled = false;
     btn.textContent = "Enviar liquidación";
   }
